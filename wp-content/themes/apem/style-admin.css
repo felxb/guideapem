@@ -1,0 +1,10 @@
+/*custom admin styles*/
+#adminmenu .wp-submenu a[href="edit-tags.php?taxonomy=post_tag"] {
+	display:none;
+}
+#post_tag-add-toggle {
+    display: none;
+}
+#post_tag-tabs {
+    display: none;
+}
