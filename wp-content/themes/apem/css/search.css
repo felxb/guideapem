@@ -1,0 +1,11 @@
+.content-search-container {
+    padding-bottom: 20px;
+}
+
+.content-search-container a {
+    display: block;
+    margin-top: 10px;
+    margin-bottom: 20px;
+    color: #AB6062;
+    font-weight: bold;
+}

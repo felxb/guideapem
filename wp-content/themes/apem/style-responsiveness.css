@@ -1,0 +1,50 @@
+@media 
+screen and (max-width: 500px),
+screen and (max-height: 500px) { 
+
+  input:checked ~ #sidebar {
+    width: 100%;
+    max-width: inherit;
+  }
+
+  * {
+    font-size: 80%;
+  }
+
+  h1 {
+   font-size: 130%;
+ }
+
+ label {
+   font-size: 100%;
+ }
+
+ .header-title {
+  display: none;
+}
+.header-title-responsive:after {
+  font-size: 80%;
+  content: 'GUIDE';
+}
+
+.header-title-container {
+  width: 50%;
+}
+
+.header-buttons-container {
+  width: 50%;
+}
+#content, #search-bar, .top-button-bar {
+  padding: 1em;
+}
+
+.accueil-subtiltle {
+  margin-top: 16px;
+}
+
+
+#search-bar, #footer {
+  font-size: 70%;
+}
+
+}

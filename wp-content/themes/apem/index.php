@@ -12,6 +12,9 @@
  * @package shfl
  */
  get_header();?>
+
+ <h1>Hello Index!</h1>
+ 
 <?php if (get_field('no_margins')===true) {
 	the_content();
 } else { ?>

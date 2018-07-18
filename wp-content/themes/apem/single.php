@@ -6,11 +6,17 @@
  *
  * @package moonshine
  */
-get_header(); ?>
+get_header(); 
 
-	<div id="primary" class="content-area">
 
-	</div><!-- #primary -->
-	<div class="ms-spinner" id="ms-primary-spinner"><div class="moon"></div></div>
-<?php
+while ( have_posts() ) :the_post();
+
+
+	get_template_part( 'template-parts/content', 'single' );
+
+
+endwhile;
+
 get_footer();
+
+?>

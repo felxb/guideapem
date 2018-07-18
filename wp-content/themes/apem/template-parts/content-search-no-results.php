@@ -1,0 +1,1 @@
+<h2><?=__("Aucun résultat pour cette recherche")?></h2>

@@ -1,0 +1,107 @@
+/*  
+  Design
+*/
+
+
+#menu-header-image {
+  width: 100%;
+}
+
+#menu-content {
+  padding: 36px;
+  margin-top:18px;
+  margin-bottom:18px;
+}
+
+.menu-element > a {
+  display: inline-block;
+  margin-bottom:18px;
+}
+
+
+.menu-menu-title {
+  vertical-align: middle;
+}
+
+.menu-element {
+  font-size: 1.4em;
+  margin-bottom: 10px;
+}
+
+.menu-sub-element-1 {
+  font-size: 0.9em;
+  margin-bottom: 12px;
+  margin-left: 9px;
+}
+
+.menu-sub-element-1 > a {
+  display: inline-block;
+  margin-bottom: 6px;
+}
+
+ .menu-sub-element-2 {
+  margin-left: 36px;
+  margin-bottom: 10px;
+  font-size: 80%;
+} 
+
+.menu-element svg {
+  float: left;
+  margin-right: 6px;
+}
+
+.menu-sub-element-1 > label > span {
+  margin-right: 6px;
+}
+
+.menu-sub-element-1 > ul {
+  margin-top: 6px;
+}
+
+
+/*
+  Sub menu accordion
+*/
+
+.chevron {
+    display: inline;
+}
+
+input:checked ~ label .chevron svg{
+  transform: rotate(90deg);
+}
+
+.sub li {
+  overflow: hidden;
+  max-height: 0;
+}
+
+input:checked ~ .sub li {
+ max-height: 500px;
+}
+
+.chevron, li, #sidebar {
+  transition: all 0.05s;
+}
+
+
+.menu-footer-text{
+    color: #841618;
+    text-align: center;
+    text-transform: uppercase;
+    font-weight: bold;
+    font-size: 70%;
+}
+
+.menu-trait {
+    margin-bottom: 3em;
+    margin-top: 3em;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.menu-element img {
+    float: left;
+    margin-right: 13px;
+    height: 28px;
+}

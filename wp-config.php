@@ -18,15 +18,18 @@
  * @package WordPress
  */
 
+define('WP_SITEURL', 'http://localhost:8888');
+define('WP_HOME', 'http://localhost:8888');
+
 // ** MySQL settings - You can get this info from your web host ** //
 /** The name of the database for WordPress */
 define('DB_NAME', 'apem');
 
 /** MySQL database username */
-define('DB_USER', 'moonshin_wp1');
+define('DB_USER', 'root');
 
 /** MySQL database password */
-define('DB_PASSWORD', 'V*16V]b3mP[NxCHamG@03#@3');
+define('DB_PASSWORD', 'root');
 
 /** MySQL hostname */
 define('DB_HOST', 'localhost');
@@ -77,7 +80,8 @@ $table_prefix  = 'wp_';
  *
  * @link https://codex.wordpress.org/Debugging_in_WordPress
  */
-define('WP_DEBUG', false);
+
+define('WP_DEBUG', true);
 
 /* That's all, stop editing! Happy blogging. */
 
