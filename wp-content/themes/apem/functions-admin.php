@@ -13,14 +13,14 @@ class SHFL_Custom_Editor_Admin {
     public function init() {
         if ($this->is_client_admin()) {
             // Disable access to the theme/widget pages if not admin
-            add_action('admin_head', array($this, 'modify_menus'));
+            //add_action('admin_head', array($this, 'modify_menus'));
             add_action('load-themes.php', array($this, 'wp_die'));
             add_action('load-widgets.php', array($this, 'wp_die'));
             add_action('load-customize.php', array($this, 'wp_die'));
             add_action('admin_init', array($this, 'remove_dashboard_meta'));
             add_action( 'wp_before_admin_bar_render', array($this, 'shfl_admin_bar_render') );
             add_action( 'admin_menu', array($this, 'shfl_remove_menu_items'), 9999 );
-
+            add_action('wp_dashboard_setup', array($this, 'shfl_custom_dashboard_widgets'));
             add_filter('user_has_cap', array($this, 'user_has_cap'));
         }
     }
@@ -28,7 +28,9 @@ class SHFL_Custom_Editor_Admin {
     public function shfl_remove_menu_items() {
         remove_menu_page('tools.php');
         remove_menu_page( 'edit-comments.php' ); 
+        remove_menu_page( 'themes.php' ); 
     }
+
 
     /*Clean admin top bar for editors*/
     public function shfl_admin_bar_render() {
@@ -45,6 +47,17 @@ class SHFL_Custom_Editor_Admin {
         remove_meta_box('dashboard_recent_drafts', 'dashboard', 'side'); //Removes the 'Recent Drafts' widget
         remove_meta_box('dashboard_recent_comments', 'dashboard', 'normal'); //Removes the 'Activity' widget
         remove_meta_box('dashboard_right_now', 'dashboard', 'normal'); //Removes the 'At a Glance' widget
+        remove_meta_box('dashboard_quick_press', 'dashboard', 'side'); //Removes the 'At a Glance' widget
+        remove_meta_box('dashboard_activity', 'dashboard', 'normal'); //Removes the 'At a Glance' widget
+    }
+  
+    public function shfl_custom_dashboard_widgets() {
+        global $wp_meta_boxes;  
+        wp_add_dashboard_widget('custom_help_widget', 'Accueil', array($this,'shfl_dashboard_welcome'));
+    }
+     
+    public function shfl_dashboard_welcome() {
+        echo '<p>Bienvenue sur le panneau d\'administration du guide APEM.</p>';
     }
 
     public function wp_die() {

@@ -63,4 +63,12 @@ endif;
 
 <div class="trait2px trait-rose margin-top"></div>
 
+<div class="single-use-disclosure">
+  <p>Le contenu de ce site est offert à titre informatif seulement. Nous ne pouvons être tenus responsables des suites de l’utilisation d’une information transmise sur ce site. Vous êtes responsables de respecter la Loi, et dans le doute, consultez un avocat (e) spécialisé (e) en droit du divertissement et/ou en droit d’auteur.
+  </p>
+  <p>
+Ne prenez jamais pour acquis que les détenteurs des droits des œuvres musicales et des enregistrements sonores adhéreront à votre projet. Il faut toujours leur demander l’autorisation avant d’utiliser une œuvre musicale et/ou un enregistrement sonore, et ce, peu importe si le matériau original utilisé est partiel ou complet, qu’elle que soit sa durée, et s’il a été modifié ou non. Dans le cas contraire, vous pourriez faire l’objet d’une poursuite pour violation de droit d’auteur.
+</p>
+</div>
+
 

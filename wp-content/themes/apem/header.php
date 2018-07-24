@@ -11,24 +11,16 @@
 ?><!DOCTYPE html>
 <html <?php language_attributes(); ?>>
 <head>
-	<?php if ( is_singular( array('masterpropage','propage') ) ): ?>
-		<meta name="robots" content="noindex,nofollow">
-	<?php endif; ?>
-	<?php $siteTitle = 'APEM';
-//  wp_title('',false).(is_product()&&get_field("hide_artist_in_title")!==1?' by '. get_the_title(get_field('product_artist')):'').(wp_title('', false)? ' | ':'').get_bloginfo('name') ;
-// if (is_shop()) $siteTitle = 'Shop | Moonshine';
-// $siteTitle = sanitize_text_field($siteTitle);
-	?>
+	<?php $siteTitle = wp_title('', false).(wp_title('', false)? ' | ':'').get_bloginfo('name');?>
 	<title><?php echo $siteTitle; ?></title>
 	<?php $description = get_bloginfo('description')?>
 	<meta name="description" content="<?php echo $description; ?>">
 	<meta charset="<?php bloginfo( 'charset' ); ?>">
 	<?php if (wp_is_mobile()): ?>
-		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0">
-		<?php else: ?>
-			<meta name="viewport" content="width=device-width, initial-scale=1">
-		<?php endif; ?>
-
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0">
+	<?php else: ?>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+	<?php endif; ?>
 
 		<!-- Latest compiled and minified CSS -->
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -45,8 +37,6 @@
 				$("#share-input").change(function() {
 					console.log('input changed')
 					if(this.checked && $('#search-input').is(":checked")) {
-						console.log('if good')
-
 						$('#search-input').prop('checked', false);
 					}
 				});
@@ -62,7 +52,6 @@
 		<link rel="profile" href="http://gmpg.org/xfn/11">
 		<link rel="pingback" href="<?php bloginfo( 'pingback_url' ); ?>">
 
-		<meta property="fb:app_id" content="812344492225904"/>
 		<meta property="og:title" content="<?php echo $siteTitle; ?>" />
 		<meta property="og:description" content="<?php echo $description; ?>" />
 
@@ -81,278 +70,13 @@
 				<meta property="og:type" content="article"/>
 			<?php endwhile; endif; wp_reset_postdata();?>
 		<?php } else {?>
-			<meta property="og:image" content="<?php echo get_stylesheet_directory_uri();?>/img/moonshine-grey-on-purple-1280x943.png"/>
+			<meta property="og:image" content="<?php echo get_stylesheet_directory_uri();?>/images/guide-apem.png"/>
 			<meta property="og:type" content="website"/>
 		<?php }?>
 
-		<?php
-
-		$video_type=false;
-		if (get_field('news_embed')){
-			$newsEmbed = get_field('news_embed');
-			$videoId = '';
-			$video_type = false;
-			if ( strpos($newsEmbed, 'youtube.com') !== false ) {
-				$video_type = 'youtube';
-				preg_match('/embed\/([\w+\-+]+)[\"\?]/',$newsEmbed,$videoId,PREG_OFFSET_CAPTURE,0); 
-				$videoId = $videoId[1][0];
-			}
-		}
-
-		if ($video_type=="youtube"){ ?>
-			<meta property="og:type" content="video.other" />
-			<meta property="og:video:url" content="https://www.youtube.com/embed/<?php echo $videoId; ?>" />
-			<meta property="og:video:secure_url" content="https://www.youtube.com/embed/<?php echo $videoId; ?>" />
-			<meta property="og:video:type" content="text/html" />
-			<meta property="og:video:width" content="1280" />
-			<meta property="og:video:height" content="720" />
-			<meta property="og:video:url" content="http://www.youtube.com/v/<?php echo $videoId; ?>?version=3&amp;autohide=1" />
-			<meta property="og:video:secure_url" content="https://www.youtube.com/v/<?php echo $videoId; ?>?version=3&amp;autohide=1" />
-			<meta property="og:video:type" content="application/x-shockwave-flash" />
-			<meta property="og:video:width" content="1280" />
-			<meta property="og:video:height" content="720" />
-		<?php } ?>
-
 
 		<?php 
-		/*Structured data for SEO*/
-// if (is_home()||is_page(array('music','videos','events'))||is_archive()||is_singular(array('post','product')):
 
-// 	$markup = '<script type="application/ld+json">';
-
-// 	if (have_posts()): while (have_posts()) : the_post();
-
-// 		$itemTitle = get_the_title().(get_post_type()=='product'&&!get_field("hide_artist_in_title")?' by '. get_the_title(get_field('product_artist')):'').' | '.get_bloginfo('name') ;
-
-// 		$description = get_the_excerpt();
-
-// 		$image_id = get_post_thumbnail_id();
-// 		$image_url = wp_get_attachment_image_src($image_id,'large', true);
-// 		$image_url = $image_url[0];
-
-// 		$itemUrl = get_the_permalink();
-
-// 		$id = get_the_ID();
-// 		$itemDate = (get_post_type()=='product'?get_field('release_date'):get_field('moon_date'));
-// 		$itemDate = date('Y-m-d\TH:i:sO',strtotime($itemDate));
-// 		$publishDate = get_the_date('Y-m-d\TH:i:sO');
-
-// 		$isEvent = get_field('event_bool');
-
-// 		$isVideo = false ;
-// 		$videoCategories = moonshine_get_category_ids(array('videos'));
-// 		if (count($videoCategories[0])>0 && has_term( $videoCategories[0], 'category' ) ) $isVideo = true;
-// 		if (count($videoCategories[1])>0 && has_term( $videoCategories[1], 'product_cat' ) ) $isVideo = true;
-
-
-
-// 		$availabilityString = "OutOfStock";
-// 		if (get_post_type()=='product'){
-// 			$product = wc_get_product( $id );
-// 			$availability = $product->is_in_stock();
-// 			if ($availability==1&&get_field('hide_buy_button')!==1) $availabilityString = "InStock";
-// 		} else if (time()<=strtotime($itemDate)){
-// 			$availabilityString = "InStock";
-// 		} 
-
-
-// 		$availabilityString = "OutOfStock";
-// 		$upcoming = time()<=strtotime($itemDate);
-
-// 		if (get_post_type()=='product'){
-
-// 			$product = wc_get_product( $id );
-// 			$price = intVal($product->get_regular_price());
-// 			$availability = $product->is_in_stock();
-
-// 			if ($availability&&!get_field('hide_buy')) $availabilityString = "InStock";
-// 			else $availabilityString = "OutOfStock";
-
-// 		} else if ($isEvent && $upcoming){
-// 			$availabilityString = "InStock";
-// 		} else if ($isEvent && !$upcoming){
-// 			$availabilityString = "OutOfStock";
-// 		} else if ($id == 6210) { //for mixtape (special case)
-// 			$availabilityString = "InStock";
-// 		}
-
-// 		/*music products, to be finished and then declared to google*/
-// 		// if (get_post_type()=='product'&&get_field("music_product_boolean")){
-
-// 		// 	$sameAsUrl = '';
-// 		// 	$sameAsUrl = get_field("product_links")[0]["product_link_url"];
-// 		// 	$markup = '
-// 		// 	{
-// 		// 	  "@context": "http://schema.org",
-// 		// 	  "@type": "MusicAlbum",
-// 		// 	  "url": "'.$itemUrl.'",
-// 		// 	  "image": [
-// 		// 	    "'.$image_url.'"
-// 		// 	   ],
-// 		// 	  "name": "'.$itemTitle.'",
-// 		// 	  "sameAs": "'.$sameAsUrl.'",
-// 		// 	  "description": "'.$description.'"
-// 		// 	}';
-
-
-// 		// } 
-
-// 		/*other types of content*/
-
-// 		if ($isVideo) {
-// 			$markup .= '
-// 			{
-// 			  "@context": "http://schema.org",
-// 			  "@type": "VideoObject",
-// 			  "name": "'.$itemTitle.'",
-// 			  "description": "'.$description.'",
-// 			  "thumbnailUrl": "'.$image_url.'",
-// 			  "uploadDate": "'.$itemDate.'",
-// 			  "datePublished": "'.$publishDate.'",
-// 			  "dateModified": "'.get_the_modified_date('Y-m-d\TH:i:sO').'",
-// 			  "author": {
-// 			    "@type": "Organization",
-// 			    "name": "Moonshine",
-// 			    "logo": {
-// 			      "@type": "ImageObject",
-// 			      "url": "https://moonshine.mu/ms/wp-content/uploads/2018/01/moonshine-tickets-app-logo.png",
-// 			    }	  
-// 			  },
-// 			  "publisher": {
-// 			    "@type": "Organization",
-// 			    "name": "Moonshine",
-// 			    "logo": {
-// 			      "@type": "ImageObject",
-// 			      "url": "https://moonshine.mu/ms/wp-content/uploads/2018/01/moonshine-tickets-app-logo.png"
-// 			    }
-// 			  },
-// 			  "embedUrl": "'.get_field('news_embed',$id,false).'",
-// 			}';
-
-// 		} else if ($isEvent==1) {
-// 			$ticketUrl = $itemUrl;
-// 			if (get_field('main_ticket_url') && get_field('main_ticket_url') !== '') $ticketUrl = get_field('main_ticket_url');
-
-// 			$markup .= '
-// 			{
-// 			  "@context": "http://schema.org",
-// 			  "@type": "MusicEvent",
-// 			  "location": {
-// 			    "@type": "MusicVenue",
-// 			    "name": "'.get_field('venue_name').'",
-// 			    "address": "'.get_field('venue_address').'"
-// 			  },
-// 			  "name": "'.$itemTitle.'",
-// 			  "image": "'.$image_url.'",
-// 			  "offers": {
-// 			    "@type": "Offer",
-// 			    "url": "'.$ticketUrl.'",
-// 			    "price": "'.get_field('event_price').'",
-// 			    "priceCurrency": "'.get_field('event_currency').'",
-// 			    "availability": "http://schema.org/'.$availabilityString.'"
-// 			  },
-// 			  "datePublished": "'.$publishDate.'",
-// 			  "dateModified": "'.get_the_modified_date('Y-m-d\TH:i:sO').'",
-// 			  "author": {
-// 			    "@type": "Organization",
-// 			    "name": "Moonshine",
-// 			    "logo": {
-// 			      "@type": "ImageObject",
-// 			      "url": "https://moonshine.mu/ms/wp-content/uploads/2018/01/moonshine-tickets-app-logo.png",
-// 			    }	  
-// 			  },
-// 			  "performer": [';
-
-// 			if (have_rows('event_performers')):
-// 			  	while (have_rows('event_performers')): the_row();
-// 			    $markup .= '{
-// 			      "@type": "MusicGroup",
-// 			      "name": "'.get_sub_field("performer_name").'",
-// 			      "sameAs": "'.get_sub_field("performer_url").'"
-// 			    }';
-// 				endwhile;
-// 			endif;
-
-// 			$markup .= ' ],
-// 				"startDate": "'.$itemDate.'",
-// 			}';
-
-// 		} else if (get_post_type()=='product') {
-// 			$markup .= '
-// 			{
-// 			  "@context": "http://schema.org/",
-// 			  "@type": "Product",
-// 			  "name": "'.$itemTitle.'",
-// 			  "image": "'.$image_url.'",
-// 			  "description": "'.$description.'",
-// 			  "mpn": "'.get_field('product_upc').'",
-// 			  "brand": {
-// 			    "@type": "Thing",
-// 			    "name": "Moonshine"
-// 			  },
-// 			  "datePublished": "'.$publishDate.'",
-// 			  "dateModified": "'.get_the_modified_date('Y-m-d\TH:i:sO').'",
-// 			  "author": {
-// 			    "@type": "Organization",
-// 			    "name": "Moonshine",
-// 			    "logo": {
-// 			      "@type": "ImageObject",
-// 			      "url": "https://moonshine.mu/ms/wp-content/uploads/2018/01/moonshine-tickets-app-logo.png"
-// 			    }	  
-// 			  },
-// 			  "offers": {
-// 			    "@type": "Offer",
-// 			    "priceCurrency": "CAD",
-// 			    "price": "'.$price.'",
-// 			    "priceValidUntil": "'.date('Y-m-d',time()+3600*24*30).'",
-// 			    "itemCondition": "http://schema.org/NewCondition",
-// 			    "availability": "http://schema.org/'.$availabilityString.'",
-// 			    "seller": {
-// 			      "@type": "Organization",
-// 			      "name": "Moonshine"
-// 			    }
-// 			  }
-// 			}';
-
-// 		} else if (get_post_type()=='post') {
-// 			$markup .= '
-// 			{
-// 			  "@context": "http://schema.org",
-// 			  "@type": "NewsArticle",
-// 			  "mainEntityOfPage": {
-// 			    "@type": "WebPage",
-// 			    "@id": "'.$current_url.'"
-// 			  },
-// 			  "headline": "'.$itemTitle.'",
-// 			  "image": "'.$image_url.'",
-// 			  "datePublished": "'.$publishDate.'",
-// 			  "dateModified": "'.get_the_modified_date('Y-m-d\TH:i:sO').'",
-// 			  "publisher": {
-// 			    "@type": "Organization",
-// 			    "name": "Moonshine",
-// 			    "logo": {
-// 			      "@type": "ImageObject",
-// 			      "url": "https://moonshine.mu/ms/wp-content/uploads/2018/01/moonshine-tickets-app-logo.png"
-// 			    }
-// 			  },
-// 			  "author": {
-// 			    "@type": "Organization",
-// 			    "name": "Moonshine",
-// 			    "logo": {
-// 			      "@type": "ImageObject",
-// 			      "url": "https://moonshine.mu/ms/wp-content/uploads/2018/01/moonshine-tickets-app-logo.png",
-// 			    }	  
-// 			  },
-// 			  "description": "'.$description.'"
-// 			}';
-// 		} 
-// 		$markup .= ',';
-// 	endwhile; endif;
-
-// 	$markup .= '</script>';
-// 	echo $markup;
-
-// endif;
 		wp_reset_postdata();
 
 		?>
@@ -376,53 +100,13 @@
 		<meta name="theme-color" content="#ffffff">
 
 
-		<!-- Fonts -->
-		<link href="https://fonts.googleapis.com/css?family=Work+Sans:400,700" rel="stylesheet">
-		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
-
-
 		<script src="https://use.typekit.net/vmp3qca.js"></script>
 		<script>try{Typekit.load({ async: true });}catch(e){}</script>
 
 		<?php wp_head();?>
 
-		<?php if ( is_singular( array('masterpropage','propage') ) && get_field('propage_primary_color') ): ?>
-		<style>
-		.primary-color-text {
-			color:<?php echo get_field('propage_primary_color');?>;
-		}
-		.primary-color-border {
-			border-color:<?php echo get_field('propage_primary_color');?>;
-		}
-		.primary-color-background {
-			background-color:<?php echo get_field('propage_primary_color');?>;
-		}		
-		.primary-color-bullet li::before {
-			color:<?php echo get_field('propage_primary_color');?>;
-		}
-		.ms-post-container a, .ms-post-container a:link, .ms-post-container a:visited {
-			color:<?php echo get_field('propage_secondary_color');?>;
-		}
-		.ms-post-container a:hover, .ms-post-container a:focus {
-			color:<?php $color = get_field('propage_secondary_color'); echo moonshine_adjust_brightness($color,50);?>;
-		}
-		.secondary-color-text {
-			color:<?php echo get_field('propage_secondary_color');?>;
-		}
-	</style>
-<?php endif; ?>
 
-<script>
-// @TODO: Insert ga code
-  // (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-  // (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-  // m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  // })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
 
-  // ga('create', 'UA-77902920-1', 'auto');
-  // ga('send', 'pageview');
-
-</script>
 </head>
 
 	<body>

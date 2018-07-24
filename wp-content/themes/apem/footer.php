@@ -12,8 +12,6 @@
 ?>
 
 </div><!-- #content -->
-<div id="infscr-loading"><div><span class="moon-medium"></span></div></div>
-
 
 </div><!-- #page -->
 
@@ -34,7 +32,7 @@
 
      </td>
      <td width="50%" style="text-align: right;">
-        <a href="https://apem.ca">
+        <a href="https://apem.ca" target="_blank">
            <span style=""><?=__('Un guide concu par l\'','shfl')?></span>
 
 

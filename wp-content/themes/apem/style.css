@@ -130,16 +130,11 @@ svg {
 	vertical-align: middle;
 }
 
+
 /*
 
 Basics
 
-*/
-/*
-.icon {
-	display: inline-block;
-	width: 36px;
-}
 */
 	
 h1 {
@@ -169,6 +164,11 @@ h4 {
 	color: #C18A8B;
 	margin-bottom: 12px;
 	margin-top: 12px;
+}
+
+
+p {
+    padding-bottom: 12px;
 }
 
 .button {
@@ -205,6 +205,7 @@ h4 {
 }
 
 .trait {
+	margin-top: 1px;
 	height: 1px;
 }
 
@@ -463,6 +464,13 @@ a:focus {
     overflow: visible;
 }
 
+.single-use-disclosure {
+	margin-top: 32px;
+	font-size: 0.8em;
+	padding-top: 24px;
+}
+
+
 /*
 
 Definition page
@@ -495,4 +503,26 @@ Definition page
 .header-buttons-container {
 	width: 20%;
 	text-align: right;
+}
+
+/*Fixes menu Felix*/
+.menu-element > a {
+    display: inline-block;
+    margin-bottom: 18px;
+    line-height: 14px;
+}
+.chevron {
+    float: left;
+    display: inline;
+}
+.button .menu-menu-title {
+  vertical-align:top
+}
+.menu-sub-element-1 > label > span {
+    margin-right: 6px;
+    vertical-align: top;
+}
+.button:hover .filledSVG {
+    stroke: none!important;
+    fill: #881719 !important;
 }

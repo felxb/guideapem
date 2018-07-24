@@ -15,7 +15,8 @@
 
 .menu-element > a {
   display: inline-block;
-  margin-bottom:18px;
+    margin-bottom: 18px;
+    line-height: 14px;
 }
 
 
@@ -51,8 +52,9 @@
 }
 
 .menu-sub-element-1 > label > span {
-  margin-right: 6px;
-}
+    margin-right: 6px;
+    vertical-align: top;
+  }
 
 .menu-sub-element-1 > ul {
   margin-top: 6px;
@@ -64,8 +66,9 @@
 */
 
 .chevron {
+   float: left;
     display: inline;
-}
+  }
 
 input:checked ~ label .chevron svg{
   transform: rotate(90deg);
@@ -104,4 +107,8 @@ input:checked ~ .sub li {
     float: left;
     margin-right: 13px;
     height: 28px;
+}
+
+.button .menu-menu-title {
+  vertical-align:top
 }

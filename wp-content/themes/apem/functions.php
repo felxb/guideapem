@@ -59,6 +59,20 @@ add_action( 'admin_enqueue_scripts', 'shfl_admin_enqueue_scripts' );
 
 /*Custom Post Types*/
 
+function shfl_get_use_slug() {
+
+    // array of slug data
+    $slugs = array( 
+        'fr_FR' => 'utilisation',
+        'fr_CA' => 'utilisation',
+        'en_CA' => 'use'
+    );
+    // return a default slug
+    if( ! defined( 'WPLANG' ) || ! WPLANG || 'en_US' == WPLANG || !array_key_exists(WPLANG, $slugs) ) return 'use';
+
+    return $slugs[WPLANG];
+}
+
 function shfl_custom_post_types() {
 
 	/*Definitions*/
@@ -111,6 +125,8 @@ function shfl_custom_post_types() {
 
 	$supports = array('title');
 
+	$slug = shfl_get_use_slug();
+
 	register_post_type( 'use',
 	    array(
 	      'labels' => $labels,
@@ -124,7 +140,7 @@ function shfl_custom_post_types() {
 	      'show_ui' => true,
 	      'menu_icon' => 'dashicons-admin-links', //https://developer.wordpress.org/resource/dashicons/#index-card
 	      'rewrite' =>  array(
-					'slug' => 'use',
+					'slug' => $slug,
 					'with_front' => true,
 					'pages' => true
 				),
@@ -240,10 +256,10 @@ function advanced_custom_search( $where, &$wp_query ) {
 	foreach( $exploded as $tag ) :
 		$where .= " 
           AND (
-            (wp_posts.post_title LIKE '$tag')
+            ({$wpdb->base_prefix}posts.post_title LIKE '$tag')
             OR EXISTS (
-              SELECT * FROM wp_postmeta
-	              WHERE post_id = wp_posts.ID
+              SELECT * FROM {$wpdb->base_prefix}postmeta
+	              WHERE post_id = {$wpdb->base_prefix}posts.ID
 	                AND (";
 		foreach ($list_searcheable_acf as $searcheable_acf) :
 			if ($searcheable_acf == $list_searcheable_acf[0]):
@@ -256,8 +272,6 @@ function advanced_custom_search( $where, &$wp_query ) {
             )
         )";
 	endforeach;
-	
-	// error_log(print_r($where, true));
 
 	return $where;
 }

@@ -4,6 +4,9 @@
 
 .content-search-container a {
     display: block;
+}
+
+.content-search-lire-la-suite {
     margin-top: 10px;
     margin-bottom: 20px;
     color: #AB6062;

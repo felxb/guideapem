@@ -12,24 +12,20 @@
  * @package moonshine
  */
 
-get_header(); ?>
+get_header(); 
 
- <h1>Hello Page!</h1>
+?>
 
-	<div id="primary" class="content-area">
-	
-		<div id="main" class="site-main ms-grid" role="main">
 
 			<?php
+				// Start the Loop.
+			while ( have_posts() ) :
+				the_post();
+				?>
 
-				while ( have_posts() ) : the_post();
-					get_template_part( 'template-parts/content', 'page' );
-				endwhile; // End of the loop.
-			
-			?>
-
-		</div><!-- #main -->
-	</div><!-- #primary -->
+<div class="content"><?php the_content();?></div>
 
 <?php
+endwhile;
+
 get_footer();
